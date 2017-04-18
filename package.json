@@ -1,0 +1,24 @@
+{
+  "name": "carlbot2",
+  "version": "1.0.0",
+  "description": "carl discordbot version 2",
+  "main": "carl2.js",
+  "scripts": {
+    "dev": "nodemon carl2.js",
+    "prod": "pm2 start carl2.js --node-args='--harmony'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SlawekPelka/carl-discord-bot.git"
+  },
+  "keywords": [
+    "node.js",
+    "discord.js"
+  ],
+  "author": "SlawekPelka <s.pelka@live.nl>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SlawekPelka/carl-discord-bot/issues"
+  },
+  "homepage": "https://github.com/SlawekPelka/carl-discord-bot#readme"
+}

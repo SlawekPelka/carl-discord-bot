@@ -13,13 +13,13 @@ changePrefix
 changeOption [some server option]
 
 ==PUBLIC==
+save usernames
 giphy
 youtube search
 spotify search
 emotes
 urban dictionary // https://www.npmjs.com/package/urban
 wiki search // https://www.npmjs.com/package/node-wikipedia
-convert imperial to metric | metric to imperial
 server info
 server emotes
 MAL api
