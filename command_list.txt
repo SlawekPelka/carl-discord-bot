@@ -1,7 +1,6 @@
 ==ADMIN==
-ping
+ping - done
 help
-status
 about
 enable
 disable
@@ -13,7 +12,7 @@ changePrefix
 changeOption [some server option]
 
 ==PUBLIC==
-save usernames
+saved game usernames
 giphy
 youtube search
 spotify search

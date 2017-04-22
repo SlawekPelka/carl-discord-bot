@@ -20,5 +20,18 @@
   "bugs": {
     "url": "https://github.com/SlawekPelka/carl-discord-bot/issues"
   },
-  "homepage": "https://github.com/SlawekPelka/carl-discord-bot#readme"
+  "homepage": "https://github.com/SlawekPelka/carl-discord-bot#readme",
+  "devDependencies": {
+    "discord.js": "^11.0.0",
+    "humanize-duration": "^3.10.0",
+    "imdb-api": "^2.2.2",
+    "moment": "^2.18.1",
+    "node-lyrics": "^1.0.0",
+    "node-wikipedia": "0.0.2",
+    "popura": "^1.2.5",
+    "request-promise-native": "^1.0.3",
+    "spotify-resolve": "^2.1.0",
+    "urban": "^0.3.1",
+    "youtube-node": "^1.3.0"
+  }
 }
