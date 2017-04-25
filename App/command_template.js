@@ -1,15 +1,16 @@
 module.exports = {
-    exec(params, message, options) {
+    exec(params, message, options, client) {
         
     },
     metaData() {
         return {
-            name: "",
+            name: '',
             avaliableOptions: '',
             description: '',
-            usage: `<prefix> `,
+            usage: '<prefix> ',
             example: `!c `,
-            group: ""
+            group: '',
+            execWith: ''
         }
     }
 }

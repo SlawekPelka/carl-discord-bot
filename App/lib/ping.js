@@ -7,12 +7,12 @@ module.exports = {
     },
     metaData() {
         return {
-            name: "Ping",
+            name: 'Ping',
             avaliableOptions: '-',
             description: `Used to show *aproximate* message resolve time`,
-            usage: `<prefix> ping`,
+            usage: '<prefix> ping',
             example: `!c ping`,
-            group: "self",
+            group: 'self',
             execWith: 'ping'
         }
     }

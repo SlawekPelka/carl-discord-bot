@@ -21,7 +21,7 @@ module.exports = message => {
                 if (commandName == '') return message.channel.sendMessage(`Command **${requested}** was not found!\nAre you sure you spelled it correctly?`);
 
                 let params = content.replace(`${grab.serverOptions(message.guild.id, 'options').prefix} `, '');
-                params = params.replace(commandName, '');
+                params = params.replace(requested, '');
                 params = params.split('--')[0];
 
                 let options = content.split('--')[1];

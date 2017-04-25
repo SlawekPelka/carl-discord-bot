@@ -6,13 +6,12 @@ const Discord = require('discord.js'),
     fs = require('fs');
 
 Client.on('ready', () => {
-    console.log(`C.A.R.L is ready!`);
+    console.log(`Bot is ready!`);
 });
 
 Client.on('message', msg => {
     let id = msg.guild.id;
     if ( grab.serverOptions(id, 'options') == undefined ) {
-        Client.writeCommandsMap();
         setDefaults(msg);
         // process.exit(1);
     } else if ( msg.content.startsWith( grab.serverOptions(id, 'options').prefix ) ) {
@@ -21,7 +20,7 @@ Client.on('message', msg => {
             try {
                 let cmd = require(`./App/lib/${res.commandName}`);
                 setTimeout(() => {
-                    cmd.exec(res.params, msg, res.options);
+                    cmd.exec(res.params, msg, res.options, Client);
                 }, 1000);
             } catch (e) {
                 console.error(e.stack);
@@ -29,27 +28,6 @@ Client.on('message', msg => {
         });
     }
 });
-
-Client.writeCommandsMap = () => {
-    fs.readFile(`${__dirname}/App/data_storage/commandsMap.json`, 'utf8', (err, content) => {
-        if (err) console.error(err.stack);
-
-        let parsedMap = JSON.parse(content);
-
-        fs.readdir(`${__dirname}/App/lib/`, (err, files) => {
-            if (err) console.error(err.stack);
-
-            files.forEach(file => {
-                let command = require(`${__dirname}/App/lib/${file}`);
-                parsedMap[command.metaData().execWith] = file.replace('.js', '');
-            });
-
-            fs.writeFile(`${__dirname}/App/data_storage/commandsMap.json`, JSON.stringify(parsedMap, null, '\t'), err => {
-                if (err) console.error(err.stack);
-            });
-        });
-    });
-}
 
 Client.on('error', console.error);
 Client.on('warn', console.warn);

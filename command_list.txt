@@ -1,7 +1,4 @@
 ==ADMIN==
-ping - done
-help
-about
 enable
 disable
 block
@@ -12,10 +9,14 @@ changePrefix
 changeOption [some server option]
 
 ==PUBLIC==
-saved game usernames
+ping - done
+help - done
+about // developer credits (my username, git link, all packages) - done
+saved game usernames - done
 giphy
 youtube search
 spotify search
+spotify to youtube (with album listing ADD TO SELF_BOT ASWELL)
 emotes
 urban dictionary // https://www.npmjs.com/package/urban
 wiki search // https://www.npmjs.com/package/node-wikipedia

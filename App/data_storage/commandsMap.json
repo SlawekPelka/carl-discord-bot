@@ -1,3 +1,7 @@
 {
-	"ping": "ping"
+	"ping": "ping",
+	"upcommands": "updatecommandsmaptemp",
+	"help": "help",
+	"about": "about",
+	"gu": "gameusernames"
 }
