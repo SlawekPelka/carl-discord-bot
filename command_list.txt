@@ -13,10 +13,9 @@ ping - done
 help - done
 about // developer credits (my username, git link, all packages) - done
 saved game usernames - done
-giphy
-youtube search
-spotify search
-spotify to youtube (with album listing ADD TO SELF_BOT ASWELL)
+giphy - done
+youtube search - done
+spotify to youtube - done
 emotes
 urban dictionary // https://www.npmjs.com/package/urban
 wiki search // https://www.npmjs.com/package/node-wikipedia
@@ -26,3 +25,4 @@ MAL api
 imdb api // https://www.npmjs.com/package/imdb-api
 clear x of your own last messages
 get lyrics // https://www.npmjs.com/package/node-lyrics
+remind me command // with human syntax

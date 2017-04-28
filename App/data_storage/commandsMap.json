@@ -3,5 +3,8 @@
 	"upcommands": "updatecommandsmaptemp",
 	"help": "help",
 	"about": "about",
-	"gu": "gameusernames"
+	"gu": "gameusernames",
+	"gif": "giphy",
+	"yt": "youtubesearch",
+	"spofiyt": "spotifytoyoutube"
 }

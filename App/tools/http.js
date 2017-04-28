@@ -1,40 +1,30 @@
 const http = require('http');
 
-module.exports = {
-    get: function(url, callback) {
-        return http.get(url, (res) => {
-            const statusCode = res.statusCode,
-                contentType = res.headers['content-type'];
+module.exports = (url, callback) => {
+    return http.get(url, res => {
+        let statusCode = res.statusCode,
+            contentType = res.headers['content-type'],
+            rawData = '',
+            error;
 
-            let error;
-            if (statusCode !== 200) {
-                error = new Error(`Your request failed.\n` + `Status Code: ${statusCode}`);
-            } else if (!/^application\/json/.test(contentType)) {
-                error = new Error(`Invalid content-type.\n` + `Expected application/json but received ${contentType}`);
+        if (statusCode !== 200) error = new Error(`Your request failed.\n` + `Status Code: ${statusCode}`);
+        if (!/^application\/json/.test(contentType)) error = new Error(`Invalid content-type.\n` + `Expected application/json but received ${contentType}`);
+        if (error) { console.error(error.message); res.resume(); return; }
+
+        res.setEncoding('utf8');
+        res.on('data', chunk => rawData += chunk);
+        res.on('end', () => {
+            try {
+                var parsedData = JSON.parse(rawData);
             }
-            if (error) {
-                console.warn(error.message);
-                res.resume();
-                return;
+            catch (e) {
+                console.error(e.message);
             }
-
-            let rawData = '';
-
-            res.setEncoding('utf8');
-            res.on('data', (chunk) => rawData += chunk);
-            res.on('end', () => {
-                try {
-                    var parsedData = JSON.parse(rawData);
-                }
-                catch (e) {
-                    console.warn(e.message);
-                }
-                finally {
-                    callback(parsedData);
-                }
-            }).on('error', (e) => {
-                console.warn(`Got error: ${e.message}`);
-            });
-        })
-    }
+            finally {
+                callback(parsedData);
+            }
+        }).on('error', e => {
+            console.error(`Got error: ${e.message}`);
+        });
+    });
 }

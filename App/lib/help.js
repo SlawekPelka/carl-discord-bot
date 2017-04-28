@@ -43,6 +43,10 @@ module.exports = {
                         {
                             name: 'Utility commands',
                             value: category['utility'].join('\n')
+                        },
+                        {
+                            name: 'Fun commands',
+                            value: category['fun'].join('\n')
                         }
                     ]
                 }
@@ -55,12 +59,14 @@ module.exports = {
             cmdName = grab.commandsMap(cmdName);
             let cmd = require(`${__dirname}/../lib/${cmdName}`);
             let meta = cmd.metaData();
+            let imageUrl = meta.image ? meta.image : '';
 
             const embed = {
                 color: 16239128,
                 author : {
                     name : `Help for ${cmdName}`
                 },
+                image: imageUrl,
                 fields : [
                     {
                         name : "Name",

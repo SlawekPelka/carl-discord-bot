@@ -6,7 +6,7 @@ const Discord = require('discord.js'),
     fs = require('fs');
 
 Client.on('ready', () => {
-    console.log(`Bot is ready!`);
+    console.log(`${Client.user.username} is ready!`);
 });
 
 Client.on('message', msg => {
@@ -15,8 +15,8 @@ Client.on('message', msg => {
         setDefaults(msg);
         // process.exit(1);
     } else if ( msg.content.startsWith( grab.serverOptions(id, 'options').prefix ) ) {
-        msg.delete();
         msgResolver(msg).then(res => {
+            msg.delete();
             try {
                 let cmd = require(`./App/lib/${res.commandName}`);
                 setTimeout(() => {
