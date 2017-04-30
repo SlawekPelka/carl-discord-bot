@@ -6,5 +6,8 @@
 	"gu": "gameusernames",
 	"gif": "giphy",
 	"yt": "youtubesearch",
-	"spofiyt": "spotifytoyoutube"
+	"spofiyt": "spotifytoyoutube",
+	"em": "emotes",
+	"urban": "urbandictionary",
+	"wiki": "wikipedia"
 }

@@ -9,7 +9,7 @@ module.exports = {
         return {
             name: 'Ping',
             avaliableOptions: '-',
-            description: `Used to show *aproximate* message resolve time`,
+            description: `Used to show aproximate message resolve time`,
             usage: '<prefix> ping',
             example: `!c ping`,
             group: 'self',

@@ -46,17 +46,18 @@ module.exports = (message, client) => {
             adminNames.push(`@${admin.username}#${admin.discriminator}`);
         });
 
-        return adminNames;
+        return adminNames.join(', ');
     }
     function getSavedEmotesCount() {
-        return emotes = grab.appData(guildID, 'emotes') ? emotes.length : 0;
+        let emotes = grab.appData(guildID, 'emotes');
+        return Object.keys(emotes).length > 0 ? Object.keys(emotes).length : 0;
     }
     function getSavedEmotesNames() {
         let emotes = grab.appData(guildID, 'emotes');
         let names = [];
         if (emotes == undefined) return '-';
 
-        for (let emote of emotes) {
+        for (let emote in emotes) {
             names.push(emote);
         }
 

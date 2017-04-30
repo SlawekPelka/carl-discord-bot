@@ -5,7 +5,7 @@ module.exports = {
         let info = botinfo(message, client);
 
         const embed = {
-            color: 14229016,
+            color: 6697881,
             author : {
                 name : `${message.guild.name} specific info about this bot`
             },

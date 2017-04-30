@@ -62,7 +62,7 @@ module.exports = {
         return {
             name: 'Spotify to youtube',
             avaliableOptions: '-',
-            description: 'Convert spotify URI to youtube',
+            description: 'Convert spotify URI to youtube video',
             usage: '<prefix> spofiyt <spotifyURI>',
             example: `!c spofiyt spotify:track:4uLU6hMCjMI75M1A2tKUQC`,
             group: 'utility',

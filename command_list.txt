@@ -16,13 +16,10 @@ saved game usernames - done
 giphy - done
 youtube search - done
 spotify to youtube - done
-emotes
-urban dictionary // https://www.npmjs.com/package/urban
-wiki search // https://www.npmjs.com/package/node-wikipedia
-server info
-server emotes
+emotes - done
+urban dictionary // https://www.npmjs.com/package/urban - done
 MAL api
 imdb api // https://www.npmjs.com/package/imdb-api
+get lyrics // https://www.npmjs.com/package/node-lyrics | (from spofiurl, yturl, normal text params) <screw soundcloud>
 clear x of your own last messages
-get lyrics // https://www.npmjs.com/package/node-lyrics
 remind me command // with human syntax
