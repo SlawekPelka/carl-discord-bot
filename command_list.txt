@@ -20,4 +20,4 @@ emotes - done
 urban dictionary // https://www.npmjs.com/package/urban - done
 MAL api - done
 imdb api // https://www.npmjs.com/package/imdb-api - done
-get lyrics // https://www.npmjs.com/package/node-lyrics | (from spofiurl, yturl, normal text params) <screw soundcloud>
+get lyrics // https://www.npmjs.com/package/node-lyrics | (from spofiurl, yturl, normal text params) <screw soundcloud> - done
