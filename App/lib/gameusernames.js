@@ -51,8 +51,7 @@ module.exports = {
 
                 fs.writeFile(usernamesPath, JSON.stringify(parsedUsernames, null, '\t'), err => {
                     if (err) console.error(err.stack);
-                    message.reply(`Saved username **${username}** for game **${game}**!`);
-                    process.exit(1);
+                    message.reply(`Saved username **${username}** for game **${game}**!`).then(m => process.exit(1));
                 });
             });
         }
@@ -71,8 +70,7 @@ module.exports = {
 
                 fs.writeFile(usernamesPath, JSON.stringify(parsedUsernames, null, '\t'), err => {
                     if (err) console.error(err.stack);
-                    message.reply(`Removed username for game **${game}**!`);
-                    process.exit(1);
+                    message.reply(`Removed username for game **${game}**!`).then(m => process.exit(1));
                 });
             });
         }

@@ -50,8 +50,7 @@ module.exports = {
                 fs.writeFile(emotesPath, JSON.stringify(parsedEmotes, null, '\t'), err => {
                     if (err) console.error(err.stack);
                     message.delete();
-                    message.channel.send(`Emote **${name}** saved!`);
-                    process.exit(1);
+                    message.channel.send(`Emote **${name}** saved!`).then(m => process.exit(1));
                 });
             });
         }
@@ -65,8 +64,7 @@ module.exports = {
 
                 fs.writeFile(emotesPath, JSON.stringify(parsedEmotes, null, '\t'), err => {
                     if (err) console.error(err.stack);
-                    message.channel.send(`Emote **${name}** deleted!`);
-                    process.exit(1);
+                    message.channel.send(`Emote **${name}** deleted!`).then(m => process.exit(1));
                 });
             });
         }
