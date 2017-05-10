@@ -18,7 +18,7 @@ module.exports = message => {
                 requested = content.split(' ')[1];
                 commandName = (grab.commandsMap(requested) !== undefined) ? grab.commandsMap(requested) : '';
  
-                if (commandName == '') return message.channel.sendMessage(`Command **${requested}** was not found!\nAre you sure you spelled it correctly?`);
+                if (commandName == '') return message.channel.send(`Command **${requested}** was not found!\nAre you sure you spelled it correctly?`);
 
                 let params = content.replace(`${grab.serverOptions(message.guild.id, 'options').prefix} `, '');
                 params = params.replace(requested, '');
@@ -33,7 +33,7 @@ module.exports = message => {
                 }
 
                 if (cmdStatus.disabled.includes(commandName)) {
-                    return message.channel.sendMessage(`Command **${commandName}** is disabled on this server!`);
+                    return message.channel.send(`Command **${commandName}** is disabled on this server!`);
                 } else {
                     resolve(response);
                 }

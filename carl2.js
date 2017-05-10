@@ -7,10 +7,11 @@ const Discord = require('discord.js'),
 
 Client.on('ready', () => {
     console.log(`${Client.user.username} is ready!`);
+    Client.user.setGame('!c help');
 });
 
 Client.on('message', msg => {
-    let id = msg.guild.id;
+    let id = (!msg.guild == null) ? msg.guild.id : '274959744526188545';
     if ( grab.serverOptions(id, 'options') == undefined ) {
         setDefaults(msg);
         // process.exit(1);

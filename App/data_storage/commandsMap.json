@@ -9,5 +9,8 @@
 	"spofiyt": "spotifytoyoutube",
 	"em": "emotes",
 	"urban": "urbandictionary",
-	"wiki": "wikipedia"
+	"wiki": "wikipedia",
+	"mal": "myanimelistsearch",
+	"imdb": "imdbsearch",
+	"sing": "getlyrics"
 }

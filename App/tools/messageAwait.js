@@ -13,7 +13,7 @@ module.exports = (message, listLimit) => {
                 coll.first().delete();
                 resolve(chosen);
             }).catch(e => {
-                message.channel.sendMessage('Command cancled!');
+                message.channel.send('Command cancled!');
                 console.error(e.stack);
             });
         } catch (e) {

@@ -29,7 +29,7 @@ module.exports = {
                         name: `Showing top 5 results for ${params}`,
                         icon_url: 'https://www.youtube.com/yt/brand/media/image/YouTube-icon-full_color.png'
                      },
-                     description: 'Respond with a number for the video',
+                     description: 'Respond with a number of the video',
                      fields: [
                         {
                             name : "Found those..",
@@ -41,12 +41,12 @@ module.exports = {
                 message.channel.sendEmbed(embed).then(m => {
                     messageAwait(message, defaults.limit).then(chosen => {
                         m.delete();
-                        m.channel.sendMessage(`https://www.youtube.com/watch?v=${list.ids[chosen]}`);
+                        m.channel.send(`https://www.youtube.com/watch?v=${list.ids[chosen]}`);
                     });
                 });
             });
         } catch (e) {
-            message.channel.sendMessage('Failed to get the requested video!');
+            message.channel.send('Failed to get the requested video!');
             console.error(e.stack);
         }
     },

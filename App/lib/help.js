@@ -55,7 +55,7 @@ module.exports = {
                 });
         } else {
             // If cmd specific help is asked
-            if (grab.commandsMap(cmdName) == undefined) message.channel.sendMessage(`Can't find **${cmdName}**!\nAre you sure you spelled it correctly?`);
+            if (grab.commandsMap(cmdName) == undefined) message.channel.send(`Can't find **${cmdName}**!\nAre you sure you spelled it correctly?`);
             cmdName = grab.commandsMap(cmdName);
             let cmd = require(`${__dirname}/../lib/${cmdName}`);
             let meta = cmd.metaData();

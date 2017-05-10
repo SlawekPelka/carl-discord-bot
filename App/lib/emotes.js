@@ -12,7 +12,7 @@ module.exports = {
 
         let listEmotes = () => {
             let emotes = grab.appData(message.guild.id, 'emotes');
-            if (!Object.keys(emotes).length > 0) return message.channel.sendMessage(`**${message.guild.name}** has no saved emotes yet!`);
+            if (emotes == undefined || !Object.keys(emotes).length > 0) return message.channel.send(`**${message.guild.name}** has no saved emotes yet!`);
 
             let emoteList = [];
 
@@ -50,7 +50,7 @@ module.exports = {
                 fs.writeFile(emotesPath, JSON.stringify(parsedEmotes, null, '\t'), err => {
                     if (err) console.error(err.stack);
                     message.delete();
-                    message.channel.sendMessage(`Emote **${name}** saved!`);
+                    message.channel.send(`Emote **${name}** saved!`);
                 });
             });
         }
@@ -64,15 +64,15 @@ module.exports = {
 
                 fs.writeFile(emotesPath, JSON.stringify(parsedEmotes, null, '\t'), err => {
                     if (err) console.error(err.stack);
-                    message.channel.sendMessage(`Emote **${name}** deleted!`);
+                    message.channel.send(`Emote **${name}** deleted!`);
                 });
             });
         }
 
         let showEmote = () => {
             let emotes = grab.appData(message.guild.id, 'emotes');
-            if (!emotes.hasOwnProperty(name)) return message.channel.sendMessage(`No emote named **${name}** has been saved for **${message.guild.name}**`);
-            message.channel.sendMessage(emotes[name]);
+            if (!emotes.hasOwnProperty(name)) return message.channel.send(`No emote named **${name}** has been saved for **${message.guild.name}**`);
+            message.channel.send(emotes[name]);
         }
 
         switch(option) {

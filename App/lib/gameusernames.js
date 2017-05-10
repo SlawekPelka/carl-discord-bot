@@ -33,7 +33,7 @@ module.exports = {
             if (list == '') return message.reply('You don\'t have any saved usernames as of yet!');
 
             message.reply('Here are your saved usernames').then(m => {
-                m.channel.sendMessage(`\`\`\`${list}\`\`\``);
+                m.channel.send(`\`\`\`${list}\`\`\``);
             });
         }
 

@@ -3,7 +3,7 @@ const grab = require('../data_storage/grab');
 
 module.exports = {
     exec(params, message, options) {
-        if (!grab.serverOptions(message.guild.id, 'admin').includes(message.author.id)) return message.channel.sendMessage(`You're not authorized to use this command!`);
+        if (!grab.serverOptions(message.guild.id, 'admin').includes(message.author.id)) return message.channel.send(`You're not authorized to use this command!`);
         
         fs.readFile(`${__dirname}/../data_storage/commandsMap.json`, 'utf8', (err, content) => {
             if (err) console.error(err.stack);
@@ -28,7 +28,7 @@ module.exports = {
         return {
             name: 'upcommands',
             avaliableOptions: '-',
-            description: 'delete me later',
+            description: '-',
             usage: '<prefix> ',
             example: `!c upcommands`,
             group: 'self',

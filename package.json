@@ -25,6 +25,7 @@
     "discord.js": "^11.0.0",
     "humanize-duration": "^3.10.0",
     "imdb-api": "^2.2.2",
+    "lyrics-fetcher": "^1.0.2",
     "moment": "^2.18.1",
     "node-lyrics": "^1.0.0",
     "node-wikipedia": "0.0.2",

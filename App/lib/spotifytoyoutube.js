@@ -37,7 +37,7 @@ module.exports = {
                         name: `Showing top 5 results for ${searchFor}`,
                         icon_url: 'https://www.brandsoftheworld.com/sites/default/files/styles/logo-thumbnail/public/072015/spotify_2015.png?itok=1MxXaGSs'
                      },
-                     description: 'Respond with a number for the video',
+                     description: 'Respond with a number of the video',
                      fields: [
                         {
                             name : "Found those..",
@@ -49,12 +49,12 @@ module.exports = {
                 message.channel.sendEmbed(embed).then(m => {
                     messageAwait(message, defaults.limit).then(chosen => {
                         m.delete();
-                        m.channel.sendMessage(`https://www.youtube.com/watch?v=${list.ids[chosen]}`);
+                        m.channel.send(`https://www.youtube.com/watch?v=${list.ids[chosen]}`);
                     });
                 });
             });
         } catch (e) {
-            message.channel.sendMessage('There was a problem with getting your video');
+            message.channel.send('There was a problem with getting your video');
             console.error(e.stack);
         }
     },

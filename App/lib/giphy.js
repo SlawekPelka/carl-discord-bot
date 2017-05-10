@@ -7,7 +7,7 @@ module.exports = {
 
         function getGif(gifs) {
             let gif = gifs.data[Math.floor(Math.random() * gifs.data.length)];
-            message.channel.sendMessage(gif.url).catch(err => {
+            message.channel.send(gif.url).catch(err => {
                 console.error(err.stack);
             });
         }

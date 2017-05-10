@@ -1,7 +1,7 @@
 module.exports = {
     exec(params, message) {
         let startTime = new Date();
-        message.channel.sendMessage('Pong!').then(msg => {
+        message.channel.send('Pong!').then(msg => {
             msg.edit(`Pong!\nEstaminated message delay is: *${new Date().getTime() - startTime.getTime()} potatos*`);
         });
     },

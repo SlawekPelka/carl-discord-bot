@@ -1,7 +1,7 @@
 const urban = require('urban');
 
 module.exports = {
-    exec(params, message, options, client) {
+    exec(params, message) {
 
         let getRandom = () => {
             urban.random().first(res => embedAnswer(res));
@@ -12,8 +12,8 @@ module.exports = {
             reqWord.first(res => embedAnswer(res));
         }
 
-        embedAnswer = (answer) => {
-            message.channel.sendMessage(`Definition of word: **${answer.word}** according to user **${answer.author}**\n*${answer.definition}*\n\n**Example**: ${answer.example}`);
+        embedAnswer = answer => {
+            message.channel.send(`Definition of word: **${answer.word}** according to user **${answer.author}**\n\n*${answer.definition}*\n\n**Example**: ${answer.example}`);
         }
 
         if (params == '') {
