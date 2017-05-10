@@ -17,7 +17,7 @@ Client.on('message', msg => {
         process.exit(1);
     } else if ( msg.content.startsWith( grab.serverOptions(id, 'options').prefix ) ) {
         msgResolver(msg).then(res => {
-            msg.delete();
+            //msg.delete();
             try {
                 let cmd = require(`./App/lib/${res.commandName}`);
                 setTimeout(() => {
