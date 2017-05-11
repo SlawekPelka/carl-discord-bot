@@ -11,7 +11,9 @@ Client.on('ready', () => {
 });
 
 Client.on('message', msg => {
-    let id = (!msg.guild == null) ? msg.guild.id : '274959744526188545';
+    if (msg.guild == null) return;
+    
+    let id = msg.guild.id;
     if ( grab.serverOptions(id, 'options') == undefined ) {
         setDefaults(msg);
     } else if ( msg.content.startsWith( grab.serverOptions(id, 'options').prefix ) ) {
