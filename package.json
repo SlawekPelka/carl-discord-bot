@@ -5,7 +5,8 @@
   "main": "carl2.js",
   "scripts": {
     "dev": "nodemon carl2.js",
-    "prod": "pm2 start carl2.js --node-args='--harmony'"
+    "prod": "pm2 start carl2.js --node-args='--harmony'",
+    "prepare": "node setup.js"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,7 @@
     "node-lyrics": "^1.0.0",
     "node-wikipedia": "0.0.2",
     "popura": "^1.2.5",
+    "prompt": "^1.0.0",
     "request-promise-native": "^1.0.3",
     "spotify-resolve": "^2.1.0",
     "urban": "^0.3.1",

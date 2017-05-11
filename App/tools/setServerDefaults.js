@@ -46,6 +46,7 @@ module.exports = message => {
 
         fs.writeFile(`${dataStoragePath}/data/commandStatus.json`, JSON.stringify(parsedCommandStatusList, null, '\t'), err => {
             if (err) console.error(err.stack);
+            process.exit(1);
         });
     });
 
@@ -59,6 +60,7 @@ module.exports = message => {
 
             fs.writeFile(`${dataStoragePath}/commandsMap.json`, JSON.stringify(parsedMap, null, '\t'), err => {
                 if (err) console.error(err);
+                process.exit(1);
             });
         });
     }

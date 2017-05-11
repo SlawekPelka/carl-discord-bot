@@ -14,7 +14,6 @@ Client.on('message', msg => {
     let id = (!msg.guild == null) ? msg.guild.id : '274959744526188545';
     if ( grab.serverOptions(id, 'options') == undefined ) {
         setDefaults(msg);
-        process.exit(1);
     } else if ( msg.content.startsWith( grab.serverOptions(id, 'options').prefix ) ) {
         msgResolver(msg).then(res => {
             //msg.delete();
