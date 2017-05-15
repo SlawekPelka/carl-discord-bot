@@ -45,7 +45,7 @@ let promptForTokens = () => {
 
     prompt.start();
     prompt.get(schema, (err, result) => {
-        if (err) console.error(err);
+        if (err) return console.error(err);
 
         let securityObject = {
             "bot_token": result.botToken,
