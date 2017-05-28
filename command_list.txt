@@ -21,3 +21,9 @@ urban dictionary // https://www.npmjs.com/package/urban - done
 MAL api - done
 imdb api // https://www.npmjs.com/package/imdb-api - done
 get lyrics // https://www.npmjs.com/package/node-lyrics | (from spofiurl, yturl, normal text params) <screw soundcloud> - done
+
+==@TODO: v1.5==
+changing syntax of sing command
+adding message length limit to savedusernames command - done
+adding check for png,jpg,gif for emotes command - done
+adding catfacts command

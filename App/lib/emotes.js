@@ -6,6 +6,7 @@ module.exports = {
         if (params == '' && options == '') return;
         let option = options != '' ? options[0] : '';
         let emotesPath = `${__dirname}/../data_storage/data/emotes.json`;
+        let allowedTypes = ['.png', '.jpg', '.jpeg', '.gif'];
 
         let name = params.split(' ')[0];
         let url = params.split(' ')[1];
@@ -40,6 +41,9 @@ module.exports = {
         }
 
         let addEmote = () => {
+            for (let allow of allowedTypes) {
+                if (!url.includes(allow)) return message.channel.send('The emote was not of valid type.\nAllowed types: png, jpg, jpeg and gif');
+            }
             fs.readFile(emotesPath, 'utf8', (err, content) => {
                 if (err) console.error(err.stack);
                 let parsedEmotes = JSON.parse(content);

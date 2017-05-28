@@ -41,9 +41,12 @@ module.exports = {
             fs.readFile(usernamesPath, 'utf8', (err, content) => {
                 if (err) console.error(err.stack);
 
+                let limit = 40;
                 let game = params.split(' ')[0];
                 let username = params.split(' ').slice(1).join(' ');
                 let parsedUsernames = JSON.parse(content);
+
+                if (username.length > limit || game.length > limit) return message.channel.send(`Username was too long!\nCurrent limit: ${limit} characters (including spaces)`);
 
                 if (!parsedUsernames.hasOwnProperty(message.author.id)) parsedUsernames[message.author.id] = {};
 
