@@ -12,5 +12,6 @@
 	"wiki": "wikipedia",
 	"mal": "myanimelistsearch",
 	"imdb": "imdbsearch",
-	"sing": "getlyrics"
+	"sing": "getlyrics",
+	"catfact": "catfacts"
 }
