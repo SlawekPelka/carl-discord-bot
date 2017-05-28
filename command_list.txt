@@ -25,4 +25,4 @@ get lyrics // https://www.npmjs.com/package/node-lyrics | (from spofiurl, yturl,
 ==@TODO: v1.5==
 adding message length limit to savedusernames command - done
 adding check for png,jpg,gif for emotes command - done
-adding catfacts command
+adding catfacts command - done
