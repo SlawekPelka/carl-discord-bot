@@ -1,10 +1,9 @@
-const CatFacts = require('catfacts');
-const catfact = new CatFacts();
+const CatFacts = require('cat-facts');
 
 module.exports = {
     exec(params, message, options, client) {
         try {
-            catfact.random(1, fact => message.channel.send(`**Did you know**: ${fact[0]}`));
+            message.channel.send(`**Did you know**: ${CatFacts.random()}`)
         } catch (e) {
             return message.channel.send('There was a problem with your cat fact.');
         }
