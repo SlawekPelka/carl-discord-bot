@@ -13,5 +13,6 @@
 	"mal": "myanimelistsearch",
 	"imdb": "imdbsearch",
 	"sing": "getlyrics",
-	"catfact": "catfacts"
+	"catfact": "catfacts",
+	"clear": "purge"
 }
