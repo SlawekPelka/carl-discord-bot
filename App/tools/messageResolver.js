@@ -16,9 +16,10 @@ module.exports = message => {
                 if (err) console.error(err);
 
                 requested = content.split(' ')[1];
+                if (requested == undefined) return;
                 commandName = (grab.commandsMap(requested) !== undefined) ? grab.commandsMap(requested) : '';
- 
-                if (commandName == '') return message.channel.send(`Command **${requested}** was not found!\nAre you sure you spelled it correctly?`);
+            
+                if (commandName == '' ) return message.channel.send(`Command **${requested}** was not found!\nAre you sure you spelled it correctly?`);
 
                 let params = content.replace(`${grab.serverOptions(message.guild.id, 'options').prefix} `, '');
                 params = params.replace(requested, '');
