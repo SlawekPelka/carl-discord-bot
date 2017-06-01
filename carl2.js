@@ -16,7 +16,7 @@ Client.on('message', msg => {
     let id = msg.guild.id;
     if ( grab.serverOptions(id, 'options') == undefined ) {
         setDefaults(msg);
-    } else if ( msg.content.split(" ")[0] ) {
+    } else if ( msg.content.split(" ")[0] === grab.serverOptions(id, 'options').prefix ) {
         msgResolver(msg).then(res => {
             //msg.delete();
             try {
