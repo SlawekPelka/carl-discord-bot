@@ -15,7 +15,14 @@ module.exports = {
 
         let trackid = (params.includes(defaults.openSpotifyTrack)) ? params.replace(defaults.openSpotifyTrack, '') : params.split('spotify:track:')[1];
 
-        let searchResultSpotify = await request(`${defaults.urlspotify}/tracks/${trackid}`);
+        const requestOptions = {
+            uri: `${defaults.urlspotify}/tracks/${trackid}`,
+            headers: {
+                "Authorization": `Bearer ${grab.securityTokens("spotify_auth_bearer")}`
+            }
+        }
+
+        let searchResultSpotify = await request(requestOptions);
             searchResultSpotify = JSON.parse(searchResultSpotify);
         let searchFor = `${searchResultSpotify.artists[0].name} - ${searchResultSpotify.name}`;
 
