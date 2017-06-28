@@ -53,7 +53,7 @@ module.exports = {
                      ]
                 }
 
-                message.channel.sendEmbed(embed).then(m => {
+                message.channel.send(embed).then(m => {
                     messageAwait(message, defaults.limit).then(chosen => {
                         m.delete();
                         m.channel.send(`https://www.youtube.com/watch?v=${list.ids[chosen]}`);

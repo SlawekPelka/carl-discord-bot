@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const grab = require('../data_storage/grab');
 
 module.exports = {
@@ -41,9 +42,10 @@ module.exports = {
         }
 
         let addEmote = () => {
-            for (let allow of allowedTypes) {
-                if (!url.includes(allow)) return message.channel.send('The emote was not of valid type.\nAllowed types: png, jpg, jpeg and gif');
-            }
+            let extensionName = path.extname(url);
+            
+            if (url.match(/\.(jpeg|jpg|gif|png)$/) == null) return message.channel.send('The emote was not of valid type.\nAllowed types: png, jpg, jpeg and gif');
+
             fs.readFile(emotesPath, 'utf8', (err, content) => {
                 if (err) console.error(err.stack);
                 let parsedEmotes = JSON.parse(content);
