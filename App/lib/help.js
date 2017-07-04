@@ -41,6 +41,10 @@ module.exports = {
                             value: category['self'].join('\n')
                         },
                         {
+                            name: 'Admin commands',
+                            value: category['admin'].join('\n')
+                        },
+                        {
                             name: 'Utility commands',
                             value: category['utility'].join('\n')
                         },
