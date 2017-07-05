@@ -5,13 +5,14 @@ module.exports = {
     exec(params, message, options) {
         let gif = '';
         let apiURI = `http://api.giphy.com/v1/gifs/search?q=${params}&api_key=${grab.securityTokens('giphy_token')}`;
-        let option = options != '' ? options[0] : '';
 
         function getGif(gifs) {
             try {
+                let option = options != '' ? options[0] : '';
+                
                 // Original idea for select option by Joe: https://github.com/jddg5wa
-                if (option.includes('select')) {
-                    gif = gifs.data[Number(option.split(':')[1]) - 1];
+                if (option.match(/[0-9]+/)) {
+                    gif = gifs.data[Number(option) - 1];
                 } else {
                     gif = gifs.data[Math.floor(Math.random() * gifs.data.length)];
                 }
@@ -21,6 +22,7 @@ module.exports = {
                 });
             } catch (e) {
                 message.channel.send('Sorry, I couldn\'t get the requested gif. Please try again.');
+                console.log(e.stack);
             }
         }
 
@@ -29,7 +31,7 @@ module.exports = {
     metaData() {
         return {
             name: 'giphy',
-            avaliableOptions: 'select:<number>',
+            avaliableOptions: '<number>',
             description: 'Search for a gif on giphy',
             usage: '<prefix> gif <searchTerm>',
             example: `!c gif cute cats`,
