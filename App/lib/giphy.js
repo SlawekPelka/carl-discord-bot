@@ -9,7 +9,7 @@ module.exports = {
 
         function getGif(gifs) {
             try {
-                // Original idea for seledct options by Joe: https://github.com/jddg5wa
+                // Original idea for select option by Joe: https://github.com/jddg5wa
                 if (option.includes('select')) {
                     gif = gifs.data[Number(option.split(':')[1]) - 1];
                 } else {
@@ -20,7 +20,7 @@ module.exports = {
                     console.error(err.stack);
                 });
             } catch (e) {
-                message.channel.send('Sorry, I couldn\'t get the requested gif. Please try again');
+                message.channel.send('Sorry, I couldn\'t get the requested gif. Please try again.');
             }
         }
 
