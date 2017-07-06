@@ -50,16 +50,18 @@ module.exports = (message, client) => {
     }
     function getSavedEmotesCount() {
         let emotes = grab.appData(guildID, 'emotes');
+        if (emotes == undefined || emotes == null) return '0'
         return Object.keys(emotes).length > 0 ? Object.keys(emotes).length : 0;
     }
     function getSavedEmotesNames() {
         let emotes = grab.appData(guildID, 'emotes');
         let names = [];
-        if (emotes == undefined) return '-';
 
         for (let emote in emotes) {
             names.push(emote);
         }
+
+        if (names.length == 0) return 'none';
 
         return names.join(', ');
     }
