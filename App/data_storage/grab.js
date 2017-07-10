@@ -10,6 +10,10 @@ const serv_admins = require('./server/admins'),
 const dat_emotes = require('./data/emotes'),
     dat_savedUsernames = require('./data/saved_usernames'),
     dat_cmdStatus = require('./data/commandStatus');
+// Logs data
+const log_usage = require('./logs/commandUsage'),
+    log_reports = require('./logs/reports'),
+    log_suggestions = require('./logs/suggestions');
 
 let grab = {};
 
@@ -17,6 +21,23 @@ grab = {
     securityTokens(key) {
         try {
             return sec_tokens[key];
+        } catch (e) {
+            console.error(e.stack);
+        }
+    },
+    logs(logType, serverID, userID) {
+        try {
+            switch (logType) {
+                case 'usage':
+                    return log_usage[serverID];
+                    break;
+                case 'reports':
+                    return log_reports[userID];
+                    break;
+                case 'suggestions':
+                    return log_suggestions[userID];
+                    break;
+            }
         } catch (e) {
             console.error(e.stack);
         }

@@ -14,5 +14,8 @@
 	"imdb": "imdbsearch",
 	"sing": "getlyrics",
 	"catfact": "catfacts",
-	"clear": "purge"
+	"clear": "purge",
+	"report": "report",
+	"suggest": "suggestion",
+	"invite": "invite"
 }
