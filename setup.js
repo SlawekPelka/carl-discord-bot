@@ -30,8 +30,12 @@ let promptForTokens = () => {
                 description: "Google API token",
                 required: true
             },
-            spotifyBearer: {
-                description: "Spotify authorization bearer token",
+            spotifyID: {
+                description: "Spotify client ID",
+                required: true
+            },
+            spotifySecret: {
+                description: "Spotify client secret",
                 required: true
             },
             malUsername: {
@@ -55,7 +59,8 @@ let promptForTokens = () => {
             "bot_token": result.botToken,
             "giphy_token": result.giphyToken,
             "google_token": result.googleToken,
-            "spotify_auth_bearer": result.spotifyBearer,
+            "spotify_clientId": result.spotifyID,
+            "spotify_secret": result.spotifySecret,
             "mal_username": result.malUsername,
             "mal_password": result.malPassword
         }
