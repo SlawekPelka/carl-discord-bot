@@ -15,7 +15,7 @@ let dataFolders = {
 
 let promptForTokens = () => {
     console.log(`You now will be prompted to input the tokens needed to run specific services.\nNo data is send anywhere, it\'s all only being written to ${__dirname}/App/data_storage/security/tokens.json`);
-    
+
     let schema = {
         properties: {
             botToken: {
@@ -33,7 +33,7 @@ let promptForTokens = () => {
             spotifyBearer: {
                 description: "Spotify authorization bearer token",
                 required: true
-            }
+            },
             malUsername: {
                 description: "MyAnimeList username",
                 required: true
