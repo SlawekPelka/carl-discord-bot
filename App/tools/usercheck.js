@@ -10,8 +10,8 @@ usercheck = {
     },
     isBlacklisted(serverID, userID) {
         let blacklist = grab.serverOptions(serverID, 'blacklist');
-        if (!blacklist.includes(userID)) return false;
-        return true;
+        if (blacklist.includes(userID)) return true;
+        return false;
     }
 }
 
