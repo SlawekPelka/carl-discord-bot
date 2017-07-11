@@ -24,21 +24,19 @@ module.exports = {
                 }
 
                 const embed = {
-                     color: 13565967,
-                     author: {
+                    color: 13565967,
+                    author: {
                         name: `Showing top 5 results for ${params}`,
                         icon_url: 'https://www.youtube.com/yt/brand/media/image/YouTube-icon-full_color.png'
-                     },
-                     description: 'Respond with a number of the video',
-                     fields: [
-                        {
-                            name : "Found those..",
-                            value : list.names.join('\n')
-                        }
-                     ]
+                    },
+                    description: 'Respond with a number of the video',
+                    fields: [{
+                        name: "Found those..",
+                        value: list.names.join('\n')
+                    }]
                 }
 
-                message.channel.sendEmbed(embed).then(m => {
+                message.channel.send(embed).then(m => {
                     messageAwait(message, defaults.limit).then(chosen => {
                         m.delete();
                         m.channel.send(`https://www.youtube.com/watch?v=${list.ids[chosen]}`);
