@@ -1,30 +1,29 @@
-const request = require('request-promise-native');
+const spotifyApi = require('spotify-web-api-node');
 const YouTube = require('../tools/youtubeCall');
 const grab = require('../data_storage/grab');
 const messageAwait = require('../tools/messageAwait');
 
 module.exports = {
-    async exec(params, message) {
+    exec(params, message, options, Client) {
         const defaults = {
-            urlspotify: 'https://api.spotify.com/v1',
             openSpotifyTrack: 'https://open.spotify.com/track/',
             limit: 5
         }
 
-        if (! ( params.includes(defaults.openSpotifyTrack) || params.includes('spotify:track:') ) ) return;
+        if (!(params.includes(defaults.openSpotifyTrack) || params.includes('spotify:track:'))) return;
 
         let trackid = (params.includes(defaults.openSpotifyTrack)) ? params.replace(defaults.openSpotifyTrack, '') : params.split('spotify:track:')[1];
 
-        const requestOptions = {
-            uri: `${defaults.urlspotify}/tracks/${trackid}`,
-            headers: {
-                "Authorization": `Bearer ${grab.securityTokens("spotify_auth_bearer")}`
-            }
-        }
+        let searchFor = '';
+        // let searchFor = <artist> - <title>
 
-        let searchResultSpotify = await request(requestOptions);
-            searchResultSpotify = JSON.parse(searchResultSpotify);
-        let searchFor = `${searchResultSpotify.artists[0].name} - ${searchResultSpotify.name}`;
+        Client.spotify.getAudioAnalysisForTrack('4uLU6hMCjMI75M1A2tKUQC')
+            .then(data => {
+                return console.log(data.body);
+            }, e => {
+                console.log('Error while fetching song data! ', e);
+            })
+
 
         try {
             YouTube(searchFor, defaults.limit).then(res => {
@@ -39,18 +38,16 @@ module.exports = {
                 }
 
                 const embed = {
-                     color: 2532955,
-                     author: {
+                    color: 2532955,
+                    author: {
                         name: `Showing top 5 results for ${searchFor}`,
                         icon_url: 'https://www.brandsoftheworld.com/sites/default/files/styles/logo-thumbnail/public/072015/spotify_2015.png?itok=1MxXaGSs'
-                     },
-                     description: 'Respond with a number of the video',
-                     fields: [
-                        {
-                            name : "Found those..",
-                            value : list.names.join('\n')
-                        }
-                     ]
+                    },
+                    description: 'Respond with a number of the video',
+                    fields: [{
+                        name: "Found those..",
+                        value: list.names.join('\n')
+                    }]
                 }
 
                 message.channel.send(embed).then(m => {
