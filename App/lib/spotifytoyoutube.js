@@ -14,53 +14,58 @@ module.exports = {
 
         let trackid = (params.includes(defaults.openSpotifyTrack)) ? params.replace(defaults.openSpotifyTrack, '') : params.split('spotify:track:')[1];
 
-        let searchFor = '';
-        // let searchFor = <artist> - <title>
-
-        Client.spotify.getAudioAnalysisForTrack('4uLU6hMCjMI75M1A2tKUQC')
+        Client.spotify.getTrack(trackid)
             .then(data => {
-                return console.log(data.body);
+                let song = data.body;
+                let searchFor = `${song.artists[0].name} - ${song.name}`;
+
+                try {
+                    YouTube(searchFor, defaults.limit).then(res => {
+
+                        let list = {
+                            "cleanNames": [],
+                            "names": [],
+                            "ids": []
+                        }
+
+                        for (let i = 0; i < res.length; i++) {
+                            if (res[i].id.kind != 'youtube#channel') {
+                                list.cleanNames.push(res[i].snippet.title);
+                                list.ids.push(res[i].id.videoId);
+                            }
+                        }
+
+                        for (let z = 0; z < list.cleanNames.length; z++) {
+                            list.names.push(`${z + 1}: ${list.cleanNames[z]}`);
+                        }
+
+                        const embed = {
+                            color: 2532955,
+                            author: {
+                                name: `Showing top ${list.ids.length} results for ${searchFor}`,
+                                icon_url: 'https://www.brandsoftheworld.com/sites/default/files/styles/logo-thumbnail/public/072015/spotify_2015.png'
+                            },
+                            description: 'Respond with a number of the video',
+                            fields: [{
+                                name: "Found those..",
+                                value: list.names.join('\n')
+                            }]
+                        }
+
+                        message.channel.sendEmbed(embed).then(m => {
+                            messageAwait(message, defaults.limit).then(chosen => {
+                                m.delete();
+                                m.channel.send(`https://www.youtube.com/watch?v=${list.ids[chosen]}`);
+                            });
+                        });
+                    });
+                } catch (e) {
+                    message.channel.send('There was a problem with getting your video');
+                    console.error(e.stack);
+                }
             }, e => {
                 console.log('Error while fetching song data! ', e);
-            })
-
-
-        try {
-            YouTube(searchFor, defaults.limit).then(res => {
-                let list = {
-                    "names": [],
-                    "ids": []
-                }
-
-                for (let i = 0; i < res.length; i++) {
-                    list.names.push(`${i + 1}: ${res[i].snippet.title}`);
-                    list.ids.push(res[i].id.videoId);
-                }
-
-                const embed = {
-                    color: 2532955,
-                    author: {
-                        name: `Showing top 5 results for ${searchFor}`,
-                        icon_url: 'https://www.brandsoftheworld.com/sites/default/files/styles/logo-thumbnail/public/072015/spotify_2015.png?itok=1MxXaGSs'
-                    },
-                    description: 'Respond with a number of the video',
-                    fields: [{
-                        name: "Found those..",
-                        value: list.names.join('\n')
-                    }]
-                }
-
-                message.channel.send(embed).then(m => {
-                    messageAwait(message, defaults.limit).then(chosen => {
-                        m.delete();
-                        m.channel.send(`https://www.youtube.com/watch?v=${list.ids[chosen]}`);
-                    });
-                });
             });
-        } catch (e) {
-            message.channel.send('There was a problem with getting your video');
-            console.error(e.stack);
-        }
     },
     metaData() {
         return {

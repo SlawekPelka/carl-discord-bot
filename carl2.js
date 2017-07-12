@@ -4,18 +4,18 @@ const Discord = require('discord.js'),
     msgResolver = require('./App/tools/messageResolver'),
     setDefaults = require('./App/tools/setServerDefaults'),
     spotifyAPIAccess = require('./App/tools/spotifyAPIaccess'),
-    timeToMidnight = require('./App/tools/timetomidnight'),
     fs = require('fs');
 
 Client.on('ready', () => {
     console.log(`${Client.user.username} is ready!`);
     Client.user.setGame('!c help | !c invite');
 
-    Client.spotify = spotifyAPIAccess.get();
+    let oneday = 1000 * 60 * 60 * 24;
+    Client.spotify = spotifyAPIAccess();
 
     setInterval(() => {
-        Client.spotify = spotifyAPIAccess.refresh(Client.spotify);
-    }, timeToMidnight);
+        Client.spotify = spotifyAPIAccess();
+    }, oneday);
 
 });
 

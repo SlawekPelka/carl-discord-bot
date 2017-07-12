@@ -6,27 +6,32 @@ const grab = require('../data_storage/grab');
 module.exports = {
     exec(params, message) {
         const defaults = {
-            url: 'https://www.googleapis.com/youtube/v3',
-            key: grab.securityTokens('google_token'),
             limit: 5
         }
 
         try {
             YouTube(params, defaults.limit).then(res => {
                 let list = {
+                    "cleanNames": [],
                     "names": [],
                     "ids": []
                 }
 
                 for (let i = 0; i < res.length; i++) {
-                    list.names.push(`${i + 1}: ${res[i].snippet.title}`);
-                    list.ids.push(res[i].id.videoId);
+                    if (res[i].id.kind != 'youtube#channel') {
+                        list.cleanNames.push(res[i].snippet.title);
+                        list.ids.push(res[i].id.videoId);
+                    }
+                }
+
+                for (let z = 0; z < list.cleanNames.length; z++) {
+                    list.names.push(`${z + 1}: ${list.cleanNames[z]}`);
                 }
 
                 const embed = {
                     color: 13565967,
                     author: {
-                        name: `Showing top 5 results for ${params}`,
+                        name: `Showing top ${list.ids.length} results for ${params}`,
                         icon_url: 'https://www.youtube.com/yt/brand/media/image/YouTube-icon-full_color.png'
                     },
                     description: 'Respond with a number of the video',
@@ -36,7 +41,7 @@ module.exports = {
                     }]
                 }
 
-                message.channel.send(embed).then(m => {
+                message.channel.sendEmbed(embed).then(m => {
                     messageAwait(message, defaults.limit).then(chosen => {
                         m.delete();
                         m.channel.send(`https://www.youtube.com/watch?v=${list.ids[chosen]}`);
