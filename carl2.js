@@ -1,28 +1,21 @@
 const Discord = require('discord.js'),
-    SpotifyWebApi = require('spotify-web-api-node'),
     Client = new Discord.Client(),
     grab = require('./App/data_storage/grab'),
     msgResolver = require('./App/tools/messageResolver'),
     setDefaults = require('./App/tools/setServerDefaults'),
+    spotifyAPIAccess = require('./App/tools/spotifyAPIaccess'),
+    timeToMidnight = require('./App/tools/timetomidnight'),
     fs = require('fs');
 
 Client.on('ready', () => {
     console.log(`${Client.user.username} is ready!`);
     Client.user.setGame('!c help | !c invite');
 
-    const spotifyApi = new SpotifyWebApi({
-        clientId: grab.securityTokens('spotify_clientId'),
-        clientSecret: grab.securityTokens('spotify_secret')
-    });
+    Client.spotify = spotifyAPIAccess.get();
 
-    spotifyApi.clientCredentialsGrant()
-        .then(data => {
-            spotifyApi.setAccessToken(data.body['access_token']);
-        }, e => {
-            console.log('Something went wrong while requesting spotify access! ', err);
-        });
-
-    Client.spotify = spotifyApi;
+    setInterval(() => {
+        Client.spotify = spotifyAPIAccess.refresh(Client.spotify);
+    }, timeToMidnight);
 
 });
 
