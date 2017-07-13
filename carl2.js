@@ -10,12 +10,13 @@ Client.on('ready', () => {
     console.log(`${Client.user.username} is ready!`);
     Client.user.setGame('!c help | !c invite');
 
-    let oneday = 1000 * 60 * 60 * 24;
+    let refreshTokenTime = 1000 * 60 * 60;
     Client.spotify = spotifyAPIAccess();
 
     setInterval(() => {
         Client.spotify = spotifyAPIAccess();
-    }, oneday);
+        console.log("spotify auth token refreshed");
+    }, refreshTokenTime);
 
 });
 
@@ -27,7 +28,7 @@ Client.on('message', msg => {
         setDefaults(msg);
     } else if (msg.content.split(" ")[0] === grab.serverOptions(id, 'options').prefix) {
         msgResolver(msg).then(res => {
-            msg.delete();
+            //msg.delete();
             try {
                 let cmd = require(`./App/lib/${res.commandName}`);
                 setTimeout(() => {

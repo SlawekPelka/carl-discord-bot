@@ -28,9 +28,11 @@ adding check for png,jpg,gif for emotes command - done
 adding catfacts command - done
 
 ==@TODO: v2.0==
-adding command log usage
 adding bug report command - done
 adding bot invite command - done
-fixing yt command
-fixing spofiyt command
+fixing yt command - done
+fixing spofiyt command - done
+display suggestion/report + message author with reply message
+adding blame command
+adding command log usage
 adding an actual README.md
