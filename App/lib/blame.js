@@ -1,5 +1,5 @@
 const grab = require('../data_storage/grab');
-const logger = require('../tools/dataLogger');
+const dataLog = require('../tools/dataLogger');
 const moment = require('moment');
 
 module.exports = {
