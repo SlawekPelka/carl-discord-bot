@@ -2,6 +2,7 @@ const spotifyApi = require('spotify-web-api-node');
 const YouTube = require('../tools/youtubeCall');
 const grab = require('../data_storage/grab');
 const messageAwait = require('../tools/messageAwait');
+const dataLog = require('../tools/dataLogger');
 
 module.exports = {
     exec(params, message, options, Client) {
@@ -55,7 +56,15 @@ module.exports = {
                         message.channel.sendEmbed(embed).then(m => {
                             messageAwait(message, defaults.limit).then(chosen => {
                                 m.delete();
-                                m.channel.send(`https://www.youtube.com/watch?v=${list.ids[chosen]}`);
+                                m.channel.send(`https://www.youtube.com/watch?v=${list.ids[chosen]}`)
+                                    .then(ytmsg => {
+                                        dataLog.resolveOveralUsage(
+                                            ytmsg.guild.id,
+                                            message.author.id,
+                                            ytmsg.id,
+                                            module.exports.metaData().name
+                                        );
+                                    })
                             });
                         });
                     });

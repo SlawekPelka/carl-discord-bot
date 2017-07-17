@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const grab = require('../data_storage/grab');
+const dataLog = require('../tools/dataLogger');
 
 module.exports = {
     exec(params, message, options) {
@@ -15,18 +16,16 @@ module.exports = {
         let listEmotes = () => {
             let emotes = grab.appData(message.guild.id, 'emotes');
             if (emotes == undefined || !Object.keys(emotes).length > 0) return message.channel.send(`**${message.guild.name}** has no saved emotes yet!`);
-
             let emoteList = [];
 
-            for (let key in emotes) emoteList.push(key); 
+            for (let key in emotes) emoteList.push(key);
 
             const embed = {
                 color: 13849600,
                 author: {
                     name: `Saved emotes for ${message.guild.name}`
                 },
-                fields: [
-                    {
+                fields: [{
                         name: 'Emotes count',
                         value: emoteList.length
                     },
@@ -43,7 +42,7 @@ module.exports = {
 
         let addEmote = () => {
             let extensionName = path.extname(url);
-            
+
             if (url.match(/\.(jpeg|jpg|gif|png)$/) == null) return message.channel.send('The emote was not of valid type.\nAllowed types: png, jpg, jpeg and gif');
 
             fs.readFile(emotesPath, 'utf8', (err, content) => {
@@ -56,7 +55,9 @@ module.exports = {
                 fs.writeFile(emotesPath, JSON.stringify(parsedEmotes, null, '\t'), err => {
                     if (err) console.error(err.stack);
                     message.delete();
-                    message.channel.send(`Emote **${name}** saved!`).then(m => process.exit(1));
+                    message.channel.send(`Emote **${name}** saved!`).then(m => {
+                        process.exit(1);
+                    });
                 });
             });
         }
@@ -70,7 +71,9 @@ module.exports = {
 
                 fs.writeFile(emotesPath, JSON.stringify(parsedEmotes, null, '\t'), err => {
                     if (err) console.error(err.stack);
-                    message.channel.send(`Emote **${name}** deleted!`).then(m => process.exit(1));
+                    message.channel.send(`Emote **${name}** deleted!`).then(m => {
+                        process.exit(1);
+                    });
                 });
             });
         }
@@ -78,10 +81,18 @@ module.exports = {
         let showEmote = () => {
             let emotes = grab.appData(message.guild.id, 'emotes');
             if (!emotes.hasOwnProperty(name)) return message.channel.send(`No emote named **${name}** has been saved for **${message.guild.name}**`);
-            message.channel.send(emotes[name]);
+            message.channel.send(emotes[name])
+                .then(m => {
+                    dataLog.resolveOveralUsage(
+                        m.guild.id,
+                        message.author.id,
+                        m.id,
+                        module.exports.metaData().name
+                    );
+                });
         }
 
-        switch(option) {
+        switch (option) {
             case 'list':
                 listEmotes();
                 break;

@@ -32,7 +32,6 @@ adding bug report command - done
 adding bot invite command - done
 fixing yt command - done
 fixing spofiyt command - done
-display suggestion/report + message author with reply message
 adding blame command
 adding command log usage
 adding an actual README.md

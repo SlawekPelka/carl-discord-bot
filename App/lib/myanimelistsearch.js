@@ -1,6 +1,7 @@
 const mal = require('popura');
 const grab = require('../data_storage/grab');
 const messageAwait = require('../tools/messageAwait');
+const dataLog = require('../tools/dataLogger');
 
 module.exports = {
     exec(params, message) {
@@ -12,22 +13,22 @@ module.exports = {
                 let limit = 5;
 
                 for (let i = 0; i < limit; i++) {
-                    titles.push(`${i + 1}: **${res[i].title}** [${res[i].type}]`);
+                    if (res[i] != undefined) {
+                        titles.push(`${i + 1}: **${res[i].title}** [${res[i].type}]`);
+                    }
                 }
 
                 const embed = {
-                     color: 2046611,
-                     author: {
+                    color: 2046611,
+                    author: {
                         name: `Showing top ${limit} results for ${params}`,
                         icon_url: 'https://i.ppy.sh/6e0c2edb1f0930a7de9c92602bb4545ff7817c21/687474703a2f2f69636f6e732e6462302e66722f732f6d616c2e706e67'
-                     },
-                     description: 'Respond with a number of the anime',
-                     fields: [
-                        {
-                            name : "Found those..",
-                            value : titles.join('\n')
-                        }
-                     ]
+                    },
+                    description: 'Respond with a number of the anime',
+                    fields: [{
+                        name: "Found those..",
+                        value: titles.join('\n')
+                    }]
                 }
 
                 message.channel.sendEmbed(embed).then(m => {
@@ -46,8 +47,7 @@ module.exports = {
                             },
                             color: 2046611,
                             thumbnail: { url: chosenAnime.image },
-                            fields: [
-                                {
+                            fields: [{
                                     name: 'Synonyms',
                                     value: synonyms
                                 },
@@ -89,6 +89,14 @@ module.exports = {
                         }
 
                         message.channel.sendEmbed(embed)
+                            .then(m => {
+                                dataLog.resolveOveralUsage(
+                                    m.guild.id,
+                                    message.author.id,
+                                    m.id,
+                                    module.exports.metaData().name
+                                );
+                            })
                             .catch(console.error);
                     });
                 });

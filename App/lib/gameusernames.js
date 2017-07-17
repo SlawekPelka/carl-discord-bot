@@ -1,12 +1,13 @@
 const fs = require('fs');
 const grab = require('../data_storage/grab');
+const dataLog = require('../tools/dataLogger');
 
 module.exports = {
     exec(params, message, options) {
         let option = options != '' ? options[0] : '';
         let usernamesPath = `${__dirname}/../data_storage/data/saved_usernames.json`;
 
-        switch(option) {
+        switch (option) {
             case 'list':
                 listUsernames();
                 break;
@@ -22,7 +23,14 @@ module.exports = {
         }
 
         function listUsernames() {
-            if (grab.appData(message.author.id, 'usernames') == undefined) return message.reply('You don\'t have any saved usernames as of yet!');
+            if (grab.appData(message.author.id, 'usernames') == undefined) return message.reply('You don\'t have any saved usernames as of yet!').then(m => {
+                dataLog.resolveOveralUsage(
+                    m.guild.id,
+                    message.author.id,
+                    m.id,
+                    module.exports.metaData().name
+                );
+            });
             let usernames = grab.appData(message.author.id, 'usernames');
             let list = '';
 
@@ -30,10 +38,23 @@ module.exports = {
                 list += `${username}: ${usernames[username]}`;
             }
 
-            if (list == '') return message.reply('You don\'t have any saved usernames as of yet!');
+            if (list == '') return message.reply('You don\'t have any saved usernames as of yet!').then(m => {
+                dataLog.resolveOveralUsage(
+                    m.guild.id,
+                    message.author.id,
+                    m.id,
+                    module.exports.metaData().name
+                );
+            });
 
             message.reply('Here are your saved usernames').then(m => {
                 m.channel.send(`\`\`\`${list}\`\`\``);
+                dataLog.resolveOveralUsage(
+                    m.guild.id,
+                    message.author.id,
+                    m.id,
+                    module.exports.metaData().name
+                );
             });
         }
 
@@ -54,7 +75,9 @@ module.exports = {
 
                 fs.writeFile(usernamesPath, JSON.stringify(parsedUsernames, null, '\t'), err => {
                     if (err) console.error(err.stack);
-                    message.reply(`Saved username **${username}** for game **${game}**!`).then(m => process.exit(1));
+                    message.reply(`Saved username **${username}** for game **${game}**!`).then(m => {
+                        process.exit(1);
+                    });
                 });
             });
         }
@@ -62,7 +85,7 @@ module.exports = {
         function removeUsername() {
             fs.readFile(usernamesPath, 'utf8', (err, content) => {
                 if (err) console.error(err.stack);
-                
+
                 let game = params.split(' ')[0];
                 let parsedUsernames = JSON.parse(content);
 
@@ -73,7 +96,9 @@ module.exports = {
 
                 fs.writeFile(usernamesPath, JSON.stringify(parsedUsernames, null, '\t'), err => {
                     if (err) console.error(err.stack);
-                    message.reply(`Removed username for game **${game}**!`).then(m => process.exit(1));
+                    message.reply(`Removed username for game **${game}**!`).then(m => {
+                        process.exit(1);
+                    });
                 });
             });
         }

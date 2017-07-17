@@ -1,4 +1,5 @@
 const botinfo = require('../tools/botinfo');
+const dataLog = require('../tools/dataLogger');
 
 module.exports = {
     exec(params, message, options, client) {
@@ -6,14 +7,13 @@ module.exports = {
 
         const embed = {
             color: 6697881,
-            author : {
-                name : `${message.guild.name} specific info about this bot`
+            author: {
+                name: `${message.guild.name} specific info about this bot`
             },
-            description : `For further assistance please refer to the readme on github`,
-            fields : [
-                {
-                    name : `Bot prefix`,
-                    value : `**${info.getServerPrefix}**`
+            description: `For further assistance please refer to the readme on github`,
+            fields: [{
+                    name: `Bot prefix`,
+                    value: `**${info.getServerPrefix}**`
                 },
                 {
                     name: `Avaliable commands count`,
@@ -51,6 +51,14 @@ module.exports = {
         }
 
         message.channel.sendEmbed(embed)
+            .then(m => {
+                dataLog.resolveOveralUsage(
+                    m.guild.id,
+                    message.author.id,
+                    m.id,
+                    module.exports.metaData().name
+                );
+            })
             .catch(console.error);
     },
     metaData() {

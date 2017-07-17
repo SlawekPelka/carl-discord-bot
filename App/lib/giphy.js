@@ -1,5 +1,6 @@
 const grab = require('../data_storage/grab');
 const httpGet = require('../tools/http');
+const dataLog = require('../tools/dataLogger');
 
 module.exports = {
     exec(params, message, options) {
@@ -9,16 +10,21 @@ module.exports = {
         function getGif(gifs) {
             try {
                 let option = options != '' ? options[0] : '';
-                
+
                 // Original idea for select option by Joe: https://github.com/jddg5wa
                 if (option.match(/[0-9]+/)) {
                     gif = gifs.data[Number(option) - 1];
                 } else {
                     gif = gifs.data[Math.floor(Math.random() * gifs.data.length)];
                 }
-                
-                message.channel.send(gif.url).catch(err => {
-                    console.error(err.stack);
+
+                message.channel.send(gif.url).then(m => {
+                    dataLog.resolveOveralUsage(
+                        m.guild.id,
+                        message.author.id,
+                        m.id,
+                        module.exports.metaData().name
+                    );
                 });
             } catch (e) {
                 message.channel.send('Sorry, I couldn\'t get the requested gif. Please try again.');

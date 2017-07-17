@@ -1,10 +1,11 @@
 const fs = require('fs');
 const grab = require('../data_storage/grab');
+const dataLog = require('../tools/dataLogger');
 
 module.exports = {
     exec(params, message, options) {
         if (!grab.serverOptions(message.guild.id, 'admin').includes(message.author.id)) return message.channel.send(`You're not authorized to use this command!`);
-        
+
         fs.readFile(`${__dirname}/../data_storage/commandsMap.json`, 'utf8', (err, content) => {
             if (err) console.error(err.stack);
 

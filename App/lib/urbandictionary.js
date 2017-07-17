@@ -1,4 +1,5 @@
 const urban = require('urban');
+const dataLog = require('../tools/dataLogger');
 
 module.exports = {
     exec(params, message) {
@@ -13,7 +14,34 @@ module.exports = {
         }
 
         embedAnswer = answer => {
-            message.channel.send(`Definition of word: **${answer.word}** according to user **${answer.author}**\n\n*${answer.definition}*\n\n**Example**: ${answer.example}`);
+            const embed = {
+                color: 2046611,
+                title: `Definition of word: ${answer.word}`,
+                url: answer.permalink,
+                description: `*Definition by user: ${answer.author}*`,
+                fields: [{
+                        name: "Definition",
+                        value: answer.definition
+                    },
+                    {
+                        name: "Example(s)",
+                        value: answer.example
+                    },
+                    {
+                        name: "Votes",
+                        value: `:thumbsup: ${answer.thumbs_up}  -  :thumbsdown: ${answer.thumbs_down}`
+                    }
+                ]
+            }
+            message.channel.sendEmbed(embed)
+                .then(m => {
+                    dataLog.resolveOveralUsage(
+                        m.guild.id,
+                        message.author.id,
+                        m.id,
+                        module.exports.metaData().name
+                    );
+                });
         }
 
         if (params == '') {
@@ -21,7 +49,7 @@ module.exports = {
         } else {
             getDefinition();
         }
-        
+
     },
     metaData() {
         return {

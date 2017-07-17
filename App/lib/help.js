@@ -1,5 +1,6 @@
 const fs = require('fs');
 const grab = require('../data_storage/grab');
+const dataLog = require('../tools/dataLogger');
 
 module.exports = {
     exec(params, message) {
@@ -27,14 +28,13 @@ module.exports = {
 
                 const embed = {
                     color: 4484275,
-                    author : {
-                        name : `Avaliable commands for ${message.guild.name}`
+                    author: {
+                        name: `Avaliable commands for ${message.guild.name}`
                     },
-                    description : `type <prefix> help <commandName> for command specific help`,
-                    fields : [
-                        {
-                            name : "Avaliable commands count",
-                            value : `**${cmdCount}**`
+                    description: `type <prefix> help <commandName> for command specific help`,
+                    fields: [{
+                            name: "Avaliable commands count",
+                            value: `**${cmdCount}**`
                         },
                         {
                             name: 'Bot specific commands',
@@ -55,8 +55,16 @@ module.exports = {
                     ]
                 }
                 message.channel.sendEmbed(embed)
+                    .then(m => {
+                        dataLog.resolveOveralUsage(
+                            m.guild.id,
+                            message.author.id,
+                            m.id,
+                            module.exports.metaData().name
+                        );
+                    })
                     .catch(console.error);
-                });
+            });
         } else {
             // If cmd specific help is asked
             if (grab.commandsMap(cmdName) == undefined) message.channel.send(`Can't find **${cmdName}**!\nAre you sure you spelled it correctly?`);
@@ -67,14 +75,13 @@ module.exports = {
 
             const embed = {
                 color: 16239128,
-                author : {
-                    name : `Help for ${cmdName}`
+                author: {
+                    name: `Help for ${cmdName}`
                 },
                 image: imageUrl,
-                fields : [
-                    {
-                        name : "Name",
-                        value : `**${meta.name}**`,
+                fields: [{
+                        name: "Name",
+                        value: `**${meta.name}**`,
                         inline: true
                     },
                     {
@@ -111,6 +118,14 @@ module.exports = {
             }
 
             message.channel.sendEmbed(embed)
+                .then(m => {
+                    dataLog.resolveOveralUsage(
+                        m.guild.id,
+                        message.author.id,
+                        m.id,
+                        module.exports.metaData().name
+                    );
+                })
                 .catch(console.error);
         }
 

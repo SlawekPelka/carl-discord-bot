@@ -1,4 +1,5 @@
 const grab = require('../data_storage/grab');
+const dataLog = require('../tools/dataLogger');
 
 module.exports = {
     exec(params, message, options, Client) {
@@ -7,7 +8,7 @@ module.exports = {
         let reg = new RegExp('[0-9]', 'g');
         let limit = (params.match(reg)) ? Number(params) : 20;
         let fetchAmmount = Math.max(limit * 3);
-        if (limit > 50) return message.channel.send("You can only remove maximum of 200 messages at once!");
+        if (limit > 20) return message.channel.send("You can only remove maximum of 20 messages at once!");
         let requestedBy = message.author.id;
 
         let afterPurgeNotify = [
@@ -20,12 +21,22 @@ module.exports = {
         ];
 
         try {
-            message.channel.fetchMessages({limit}).then(mess => {
+            message.channel.fetchMessages({ limit }).then(mess => {
                 mess.forEach(m => {
                     if (m.author.id == Client.user.id) m.delete();
-                    if (m.author.id == requestedBy && message.content.split(" ")[0] === grab.serverOptions(message.guild.id, 'options').prefix ) m.delete();
+                    if (m.author.id == requestedBy && message.content.split(" ")[0] === grab.serverOptions(message.guild.id, 'options').prefix) m.delete();
                 });
-                message.reply(`${afterPurgeNotify[Math.floor(Math.random() * afterPurgeNotify.length)]} **${limit}** commands\nThis can take a while...`).then(m => m.delete(2000));
+                message.reply(`${afterPurgeNotify[Math.floor(Math.random() * afterPurgeNotify.length)]} **${limit}** commands\nThis can take a while...`).then(m => {
+                    m.delete(2000);
+
+                    dataLog.resolveOveralUsage(
+                        m.guild.id,
+                        message.author.id,
+                        m.id,
+                        module.exports.metaData().name
+                    );
+
+                });
             });
         } catch (e) {
             message.channel.send("Problem occured while purging! Check the logs!");
