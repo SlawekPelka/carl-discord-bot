@@ -12,6 +12,7 @@ const dat_emotes = require('./data/emotes'),
     dat_cmdStatus = require('./data/commandStatus');
 // Logs data
 const log_usage = require('./logs/commandUsage'),
+    log_blame = require('./logs/blamelist'),
     log_reports = require('./logs/reports'),
     log_suggestions = require('./logs/suggestions');
 
@@ -25,11 +26,14 @@ grab = {
             console.error(e.stack);
         }
     },
-    logs(logType, serverID, userID) {
+    logs(logType, serverID, userID, messageID) {
         try {
             switch (logType) {
                 case 'usage':
                     return log_usage[serverID];
+                    break;
+                case 'blame':
+                    return log_blame[serverID][messageID];
                     break;
                 case 'reports':
                     return log_reports[userID];

@@ -28,6 +28,7 @@ module.exports = {
         });
     },
     blame: (serverID, userID, messageID) => {
+        console.log(`${serverID}\n${userID}\n${messageID}`);
         return new Promise((resolve, reject) => {
             try {
                 fs.readFile(`${__dirname}/../data_storage/logs/blamelist.json`, 'utf8', (err, contents) => {
@@ -35,10 +36,10 @@ module.exports = {
                     let limit = 5;
 
                     if (!blameList[serverID]) blameList[serverID] = {};
-                    if (!blameList[serverID].hasOwnProperty(userID)) blameList[serverID][userID] = {};
-                    if (Object.keys(blameList[serverID][userID]).length == limit) delete blameList[serverID][userID][Object.keys(blameList[serverID][userID])[0]];
+                    if (!blameList[serverID].hasOwnProperty(messageID)) blameList[serverID][messageID] = {};
+                    if (Object.keys(blameList[serverID][messageID]).length == limit) delete blameList[serverID][messageID][Object.keys(blameList[serverID][messageID])[0]];
 
-                    blameList[serverID][userID][messageID] = Date.now();
+                    blameList[serverID][messageID][userID] = Date.now();
 
                     fs.writeFile(`${__dirname}/../data_storage/logs/blamelist.json`, JSON.stringify(blameList, '', '\t'), e => {
                         resolve(true);

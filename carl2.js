@@ -28,7 +28,7 @@ Client.on('message', msg => {
         setDefaults(msg);
     } else if (msg.content.split(" ")[0] === grab.serverOptions(id, 'options').prefix) {
         msgResolver(msg).then(res => {
-            //msg.delete();
+            msg.delete();
             try {
                 let cmd = require(`./App/lib/${res.commandName}`);
                 setTimeout(() => {
