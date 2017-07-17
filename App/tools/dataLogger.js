@@ -28,7 +28,6 @@ module.exports = {
         });
     },
     blame: (serverID, userID, messageID) => {
-        console.log(`${serverID}\n${userID}\n${messageID}`);
         return new Promise((resolve, reject) => {
             try {
                 fs.readFile(`${__dirname}/../data_storage/logs/blamelist.json`, 'utf8', (err, contents) => {
