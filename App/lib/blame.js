@@ -6,7 +6,8 @@ module.exports = {
     exec(params, message, options, client) {
         if (!params.match(/[0-9]+/g)) return message.channel.send("Issued params are not an ID!");
         try {
-            let blameList = grab.logs('blame', message.channel.id, '', params);
+            let blameList = grab.logs('blame', message.guild.id, '', params);
+            console.log(blameList);
             let user = client.users.get(Object.keys(blameList)[0]);
 
             message.channel.send(`***Blame ${params}!***\nCommand issued by: **${user.username}#${user.discriminator}**\nOn: **${moment(blameList[0]).format('LLLL')}**`)

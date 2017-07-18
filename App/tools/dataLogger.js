@@ -36,7 +36,7 @@ module.exports = {
 
                     if (!blameList[serverID]) blameList[serverID] = {};
                     if (!blameList[serverID].hasOwnProperty(messageID)) blameList[serverID][messageID] = {};
-                    if (Object.keys(blameList[serverID][messageID]).length == limit) delete blameList[serverID][messageID][Object.keys(blameList[serverID][messageID])[0]];
+                    if (Object.keys(blameList[serverID][messageID]).length == limit) delete blameList[serverID][0]
 
                     blameList[serverID][messageID][userID] = Date.now();
 
@@ -52,7 +52,8 @@ module.exports = {
     },
     resolveOveralUsage: (serverID, userID, messageID, cmdName) => {
         module.exports.usage(serverID, cmdName).then(r => {
-            module.exports.blame(serverID, userID, messageID).then(z => { return z; })
+            module.exports.blame(serverID, userID, messageID).then(z => { process.exit(1);
+                console.log(1); })
         });
     },
     report: (userID, message) => {
