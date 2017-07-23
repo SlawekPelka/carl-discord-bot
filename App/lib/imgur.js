@@ -1,6 +1,7 @@
 const imgurSearch = require('imgur-search'),
     grab = require('../data_storage/grab'),
-    imgur = new imgurSearch(grab.securityTokens('imgur'));
+    imgur = new imgurSearch(grab.securityTokens('imgur')),
+    dataLog = require('../tools/dataLogger');
 
 module.exports = {
     exec(params, message, options, client, Discord) {
@@ -14,7 +15,15 @@ module.exports = {
                 let option = options != '' ? options[0] : '';
                 if (!option.match(/[0-9]+/)) option = Math.floor(Math.random() * images.length);
 
-                message.channel.send(images[option].link);
+                message.channel.send(images[option].link)
+                    .then(m => {
+                        dataLog.resolveOveralUsage(
+                            m.guild.id,
+                            message.author.id,
+                            m.id,
+                            module.exports.metaData().name
+                        );
+                    })
             });
 
         } catch (e) {
