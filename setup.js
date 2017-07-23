@@ -47,6 +47,10 @@ let promptForTokens = () => {
                 hidden: true,
                 replace: '*',
                 required: true
+            },
+            imgurClientId: {
+                description: "Imgur client ID",
+                required: true
             }
         }
     }
@@ -62,7 +66,8 @@ let promptForTokens = () => {
             "spotify_clientId": result.spotifyID,
             "spotify_secret": result.spotifySecret,
             "mal_username": result.malUsername,
-            "mal_password": result.malPassword
+            "mal_password": result.malPassword,
+            "imgur": result.imgurClientId
         }
 
         fs.writeFileSync(`${dataFolders.target}/security/tokens.json`, JSON.stringify(securityObject), err => {

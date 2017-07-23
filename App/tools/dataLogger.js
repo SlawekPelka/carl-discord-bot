@@ -52,8 +52,10 @@ module.exports = {
     },
     resolveOveralUsage: (serverID, userID, messageID, cmdName) => {
         module.exports.usage(serverID, cmdName).then(r => {
-            module.exports.blame(serverID, userID, messageID).then(z => { process.exit(1);
-                console.log(1); })
+            module.exports.blame(serverID, userID, messageID).then(z => {
+                process.exit(1);
+                console.log(1);
+            })
         });
     },
     report: (userID, message) => {

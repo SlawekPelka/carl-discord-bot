@@ -32,6 +32,9 @@ adding bug report command - done
 adding bot invite command - done
 fixing yt command - done
 fixing spofiyt command - done
-adding blame command
-adding command log usage
+adding blame command - done
+adding command log usage - done
+
+==@TODO: v2.5 // TIME TO STOP==
+adding timer command
 adding an actual README.md
