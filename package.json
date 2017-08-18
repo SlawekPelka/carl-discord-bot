@@ -21,6 +21,9 @@
     "bugs": {
         "url": "https://github.com/SlawekPelka/carl-discord-bot/issues"
     },
+    "engines": {
+        "node": "8.4.0"
+    },
     "homepage": "https://github.com/SlawekPelka/carl-discord-bot#readme",
     "dependencies": {
         "cat-facts": "^1.0.2",
