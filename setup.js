@@ -124,7 +124,7 @@ let makeDataFolders = () => {
     }
 
     this.makeMain();
-    if (process.env.DOCKER == true) {
+    if (process.env.DOCKER == 'true') {
         let securityObject = {
             "bot_token": process.env.bot_token,
             "giphy_token": process.env.giphy_token,
