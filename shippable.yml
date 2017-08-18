@@ -13,5 +13,6 @@ build:
     - node setup.js
 
   on_success:
+    - rm .gitignore && git add --all && git commit -m"Git Gud" && git push
     - if [ "$BRANCH" == "master" ]; then git remote add dokku dokku@$DOCKER_CONNECT; fi
     - if [ "$BRANCH" == "master" ]; then git push dokku master; fi
