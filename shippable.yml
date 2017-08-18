@@ -1,10 +1,10 @@
 language: node_js
 
 node_js:
-  - 0.10.33
+  - 8.4.0
 
 env:
-  - secure: akaEc87xsSw1QowIWrXczosF0H6GNARZ2iJxtEoioQ6xV/Ouo8A3yfCQrmXdEzIOtquaDHivxlq+dR+8B5vIK0q8ISSbLje1oWYxEgiCGWMtGInceV4XaioVZGS0YR+ZQKTaSchihiul2MkipTmVD5nbM7eItvqRo2jJDOM0q4i5UoDg8fIDoM0mx9uBuB4f7z5DJwR0Wd6xfhwgyKOCG/Li9Sn4U5d54DJtfqsRBRmTSQQyyVfINr9FJo+ATQJ0nkeV4QtpD0qbM1zHL0zACILe3bKNKMfvIP0icKeaRkqeu93OEzwVg1SLWsvKMrRT+8FGqc+vPc5fIQyOdhBftoTyIpK+5MkBQIeEhC5qKk8+qgOJIRPYX/YYch2h6O7hnfzFGrWYOTzUF0Zly8CJYdEH8tGZuBVTYjp13VaKv7IJKyoRmYxDIcdlokJzvK9KzSuYXthDQmAovN5pfLgU8OSdaYCK0RLIAxS48w7R47A622watnLdfGHaScsrs5WGM46Troz+c90HLDpL275z7wBOHT9NOZkrtyzeh3r4oGVRsftIKLicYnbKezmo2wF3c6c4m3XAEtEC1WXqaH/BhXkgrbtXQIkusnLsbs0Gwfsp3cPs0UpUpk2yuOcNoCl/6nigOBQgw6P8TOhdL4xvQxT6teEIlz9JQdBnFs3rgtQ=
+  - secure: QVg53IsFAZekA0T9uwRU9vr3SMOWTwIouuDoBfh83V7DBPzBoaJL8GLIXR5/iyOzddgKEAxTQfUEQK1UXlhfyf7JnAISSq53bt3LKHDUAd0wteOu1Vrzhms78M4QN+WFAYcoFrVHdH+QP+xYJ6pDCmOrVhjr6WgF+vrfyl6tUKLThM4Nzszmr8/XS3fm3zRnUFaJ2CXcdZ1lJsfksxESpHx5G7xt9JrzKM50BTSVAx3MGyVyEbFRscf9QvgjZNMs2wTx6w68hKCfG0udlR3Kk1no0UGb/9ZDXiikaok4Sgc8VFd0j0jde+WWmBq0SB3rHoQKuZlg5p/SVCP8eqFWxcDVXa7w3kkvhKz3Z2vOwx9V7MvtKexBPR+MpP7ku3WD/D+Xg+BVGHpdkvXzJcj1gfAgcdBDwk99YgfnY0sDPs2ljq+Nq8jo9ec+aJ6bT7c2Hru3ffyg0KSSQ2fpWVdkGB0HConbG8JWHlUf9xEr3xNoE61qc4sF2nguSRWi9dNcZb4Og3gY4GQtSJNffoDd1Hy4+cPxlOw+8llxj2MDCYOI3kHvb7yeYGr1VyE8s0MorMTiMNyajnczGRsRlgA6xn4HgoTTSKatQbcJRGC36TODAPp2fDs7MBeuLUvWRQQUDkzdnIL2dW/lSWgrRMvfAUCmotH7go/hDlZPMfmZWWo=
 
 build:
   ci:
@@ -13,5 +13,5 @@ build:
     - node setup.js
 
   on_success:
-    - if [ "$BRANCH" == "master" ]; then git remote add dokku dokku@146.185.130.251:carldiscordbot; fi
+    - if [ "$BRANCH" == "master" ]; then git remote add dokku dokku@$DOCKER_CONNECT; fi
     - if [ "$BRANCH" == "master" ]; then git push dokku master; fi
