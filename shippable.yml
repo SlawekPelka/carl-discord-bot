@@ -1,0 +1,12 @@
+language: node_js
+
+node_js:
+  - 0.10.33
+
+build:
+  ci:
+    - echo 'CI running'
+
+  on_success:
+    - if [ "$BRANCH" == "master" ]; then git remote add dokku dokku@146.185.130.251:carldiscordbot; fi
+    - if [ "$BRANCH" == "master" ]; then git push dokku master; fi
