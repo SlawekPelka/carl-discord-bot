@@ -9,9 +9,9 @@ env:
 build:
   ci:
     - echo 'CI running'
-
-  on_success:
     - npm install
     - node setup.js
+
+  on_success:
     - if [ "$BRANCH" == "master" ]; then git remote add dokku dokku@$DOCKER_CONNECT; fi
     - if [ "$BRANCH" == "master" ]; then git push dokku master; fi
