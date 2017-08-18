@@ -3,9 +3,14 @@ language: node_js
 node_js:
   - 0.10.33
 
+env:
+  - secure: akaEc87xsSw1QowIWrXczosF0H6GNARZ2iJxtEoioQ6xV/Ouo8A3yfCQrmXdEzIOtquaDHivxlq+dR+8B5vIK0q8ISSbLje1oWYxEgiCGWMtGInceV4XaioVZGS0YR+ZQKTaSchihiul2MkipTmVD5nbM7eItvqRo2jJDOM0q4i5UoDg8fIDoM0mx9uBuB4f7z5DJwR0Wd6xfhwgyKOCG/Li9Sn4U5d54DJtfqsRBRmTSQQyyVfINr9FJo+ATQJ0nkeV4QtpD0qbM1zHL0zACILe3bKNKMfvIP0icKeaRkqeu93OEzwVg1SLWsvKMrRT+8FGqc+vPc5fIQyOdhBftoTyIpK+5MkBQIeEhC5qKk8+qgOJIRPYX/YYch2h6O7hnfzFGrWYOTzUF0Zly8CJYdEH8tGZuBVTYjp13VaKv7IJKyoRmYxDIcdlokJzvK9KzSuYXthDQmAovN5pfLgU8OSdaYCK0RLIAxS48w7R47A622watnLdfGHaScsrs5WGM46Troz+c90HLDpL275z7wBOHT9NOZkrtyzeh3r4oGVRsftIKLicYnbKezmo2wF3c6c4m3XAEtEC1WXqaH/BhXkgrbtXQIkusnLsbs0Gwfsp3cPs0UpUpk2yuOcNoCl/6nigOBQgw6P8TOhdL4xvQxT6teEIlz9JQdBnFs3rgtQ=
+
 build:
   ci:
     - echo 'CI running'
+    - npm install
+    - node setup.js
 
   on_success:
     - if [ "$BRANCH" == "master" ]; then git remote add dokku dokku@146.185.130.251:carldiscordbot; fi

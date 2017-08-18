@@ -55,7 +55,26 @@ let promptForTokens = () => {
         }
     }
 
-    prompt.start();
+    if (process.env.DOCKER == true) {
+        let securityObject = {
+            "bot_token": process.env.bot_token,
+            "giphy_token": process.env.giphy_token,
+            "google_token": process.env.google_token,
+            "spotify_clientId": process.env.spotify_clientId,
+            "spotify_secret": process.env.spotify_secret,
+            "mal_username": process.env.mal_username,
+            "mal_password": process.env.mal_password,
+            "imgur": process.env.imgur
+        }
+
+        fs.writeFileSync(`${dataFolders.target}/security/tokens.json`, JSON.stringify(securityObject), err => {
+            if (err) console.error(err);
+            console.error('All credentials set!\nStart the bot using npm run prod');
+        })
+    } else {
+        prompt.start();
+    }
+
     prompt.get(schema, (err, result) => {
         if (err) return console.error(err);
 
