@@ -5,6 +5,7 @@ build:
 deploy:
     steps:
       - npm-install
+      - script:
         name: install supervisor
         code: npm install -g supervisor
       - internal/docker-push:
