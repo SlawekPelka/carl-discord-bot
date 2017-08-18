@@ -21,6 +21,9 @@ deploy:
           name: pull latest image
           code: ssh root@188.226.147.210 docker pull slawekpelka/carl-discord-bot:latest
       - script:
+          name: start pm2 carl2
+          code: ssh root@188.226.147.210 npm run prod
+      - script:
           name: stop running container
           code: ssh root@188.226.147.210 docker stop carl-discord-bot || echo ‘failed to stop running container’
       - script:
@@ -35,6 +38,3 @@ deploy:
       - script:
           name: run new container
           code: ssh root@188.226.147.210 docker run -d -p 8080:22 --name carl-discord-bot slawekpelka/carl-discord-bot:current
-      - script:
-          name: start pm2 carl2
-          code: ssh root@188.226.147.210 npm run prod
