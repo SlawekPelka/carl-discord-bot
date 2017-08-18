@@ -1,6 +1,6 @@
 module.exports = {
     exec(params, message, options, client) {
-        // Code goes here
+
     },
     metaData() {
         return {
