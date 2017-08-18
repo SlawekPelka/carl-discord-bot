@@ -2,7 +2,6 @@ box: node
 build:
  steps:
      - npm-install
-     - pm2-stop-carl2
 deploy:
     steps:
       - internal/docker-push:
@@ -15,6 +14,9 @@ deploy:
           keyname: DIGITAL_OCEAN
       - add-to-known_hosts:
           hostname: 188.226.147.210
+      - script:
+          name: stop pm2 carl2 image
+          script: ssh root@188.226.147.210 pm2 stop carl2
       - script:
           name: pull latest image
           code: ssh root@188.226.147.210 docker pull slawekpelka/carl-discord-bot:latest
