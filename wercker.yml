@@ -1,0 +1,35 @@
+box: node
+build:
+ steps:
+     - npm-install
+      - script:
+        name: install supervisor
+        code: npm install -g supervisor
+      - internal/docker-push:
+        username: $DOCKER_USERNAME
+        password: $DOCKER_PASSWORD
+        repository: SlawekPelka/carl-discord-bot
+        ports: 22
+        cmd: /bin/bash -c “cd /pipeline/source && supervisor - watch ./src src/server.js”
+      - add-ssh-key:
+          keyname: DIGITAL_OCEAN
+      - add-to-known_hosts:
+          hostname: 95.85.49.167
+      - script:
+          name: pull latest image
+          code: ssh root@95.85.49.167 docker pull SlawekPelka/carl-discord-bot:latest
+      - script:
+          name: stop running container
+          code: ssh root@95.85.49.167 docker stop carl-discord-bot || echo ‘failed to stop running container’
+      - script:
+          name: remove stopped container
+          code: ssh root@95.85.49.167 docker rm carl-discord-bot || echo ‘failed to remove stopped container’
+      - script:
+          name: remove image behind stopped container
+          code: ssh root@95.85.49.167 docker rmi SlawekPelka/carl-discord-bot:current || echo ‘failed to remove image behind stopped container’
+      - script:
+          name: tag newly pulled image
+          code: ssh root@95.85.49.167 docker tag SlawekPelka/carl-discord-bot:latest SlawekPelka/carl-discord-bot:current
+      - script:
+          name: run new container
+          code: ssh root@95.85.49.167 docker run -d -p 8080:22 --name carl-discord-bot SlawekPelka/carl-discord-bot:current
