@@ -2,6 +2,7 @@ box: node
 build:
  steps:
      - npm-install
+     - npm-stop-carl2
 deploy:
     steps:
       - internal/docker-push:
@@ -32,3 +33,6 @@ deploy:
       - script:
           name: run new container
           code: ssh root@188.226.147.210 docker run -d -p 8080:22 --name carl-discord-bot slawekpelka/carl-discord-bot:current
+      -script:
+          name: start pm2 carl2
+          code: ssh root@188.226.147.210 npm run prod
