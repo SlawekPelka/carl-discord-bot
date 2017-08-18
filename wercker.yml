@@ -2,7 +2,9 @@ box: node
 build:
  steps:
      - npm-install
-      - script:
+deploy:
+    steps:
+      - npm-install
         name: install supervisor
         code: npm install -g supervisor
       - internal/docker-push:
