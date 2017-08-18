@@ -2,7 +2,7 @@ box: node
 build:
  steps:
      - npm-install
-     - npm-stop-carl2
+     - pm2-stop-carl2
 deploy:
     steps:
       - internal/docker-push:
