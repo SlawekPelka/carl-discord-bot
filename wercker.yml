@@ -16,7 +16,7 @@ deploy:
           hostname: 188.226.147.210
       - script:
           name: pull latest image
-          code: ssh root@188.226.147.210 docker pull SlawekPelka/carl-discord-bot:latest
+          code: ssh root@188.226.147.210 docker pull slawekpelka/carl-discord-bot:latest
       - script:
           name: stop running container
           code: ssh root@188.226.147.210 docker stop carl-discord-bot || echo ‘failed to stop running container’
@@ -25,10 +25,10 @@ deploy:
           code: ssh root@188.226.147.210 docker rm carl-discord-bot || echo ‘failed to remove stopped container’
       - script:
           name: remove image behind stopped container
-          code: ssh root@188.226.147.210 docker rmi SlawekPelka/carl-discord-bot:current || echo ‘failed to remove image behind stopped container’
+          code: ssh root@188.226.147.210 docker rmi slawekpelka/carl-discord-bot:current || echo ‘failed to remove image behind stopped container’
       - script:
           name: tag newly pulled image
-          code: ssh root@188.226.147.210 docker tag SlawekPelka/carl-discord-bot:latest SlawekPelka/carl-discord-bot:current
+          code: ssh root@188.226.147.210 docker tag slawekpelka/carl-discord-bot:latest slawekpelka/carl-discord-bot:current
       - script:
           name: run new container
-          code: ssh root@188.226.147.210 docker run -d -p 8080:22 --name carl-discord-bot SlawekPelka/carl-discord-bot:current
+          code: ssh root@188.226.147.210 docker run -d -p 8080:22 --name carl-discord-bot slawekpelka/carl-discord-bot:current
