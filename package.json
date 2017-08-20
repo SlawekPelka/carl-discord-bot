@@ -4,7 +4,7 @@
     "description": "carl discordbot version 2",
     "main": "carl2.js",
     "scripts": {
-        "start": "node carl2.js",
+        "start": "pm2 start carl2.js",
         "prod": "pm2 start carl2.js --node-args='--harmony'",
         "dev": "nodemon carl2.js"
     },
