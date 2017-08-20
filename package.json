@@ -1,50 +1,50 @@
 {
-  "name": "carlbot2",
-  "version": "1.0.0",
-  "description": "carl discordbot version 2",
-  "main": "carl2.js",
-  "scripts": {
-    "start": "pm2 start carl2.js --node-args='--harmony'",
-    "prod": "pm2 start carl2.js --node-args='--harmony'",
-    "dev": "nodemon carl2.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SlawekPelka/carl-discord-bot.git"
-  },
-  "keywords": [
-    "node.js",
-    "discord.js"
-  ],
-  "author": "SlawekPelka <s.pelka@live.nl>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/SlawekPelka/carl-discord-bot/issues"
-  },
-  "engines": {
-    "node": "8.4.0"
-  },
-  "homepage": "https://github.com/SlawekPelka/carl-discord-bot#readme",
-  "dependencies": {
-    "cat-facts": "^1.0.2",
-    "catfacts": "^0.4.0",
-    "discord.js": "^11.0.0",
-    "humanize-duration": "^3.10.0",
-    "imdb-api": "^2.2.2",
-    "imgur-search": "^1.0.1",
-    "lyrics-fetcher": "^1.0.2",
-    "mkdirp": "^0.5.1",
-    "moment": "^2.18.1",
-    "node-lyrics": "^1.0.0",
-    "node-wikipedia": "0.0.2",
-    "pm2": "^2.6.1",
-    "popura": "^1.2.5",
-    "prompt": "^1.0.0",
-    "request-promise-native": "^1.0.3",
-    "spotify-resolve": "^2.1.0",
-    "spotify-web-api-node": "^2.4.0",
-    "urban": "^0.3.1",
-    "wikijs": "^3.0.5",
-    "youtube-node": "^1.3.0"
-  }
+    "name": "carlbot2",
+    "version": "1.0.0",
+    "description": "carl discordbot version 2",
+    "main": "carl2.js",
+    "scripts": {
+        "start": "node carl2.js",
+        "prod": "pm2 start carl2.js --node-args='--harmony'",
+        "dev": "nodemon carl2.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/SlawekPelka/carl-discord-bot.git"
+    },
+    "keywords": [
+        "node.js",
+        "discord.js"
+    ],
+    "author": "SlawekPelka <s.pelka@live.nl>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/SlawekPelka/carl-discord-bot/issues"
+    },
+    "engines": {
+        "node": "8.4.0"
+    },
+    "homepage": "https://github.com/SlawekPelka/carl-discord-bot#readme",
+    "dependencies": {
+        "cat-facts": "^1.0.2",
+        "catfacts": "^0.4.0",
+        "discord.js": "^11.0.0",
+        "humanize-duration": "^3.10.0",
+        "imdb-api": "^2.2.2",
+        "imgur-search": "^1.0.1",
+        "lyrics-fetcher": "^1.0.2",
+        "mkdirp": "^0.5.1",
+        "moment": "^2.18.1",
+        "node-lyrics": "^1.0.0",
+        "node-wikipedia": "0.0.2",
+        "pm2": "^2.6.1",
+        "popura": "^1.2.5",
+        "prompt": "^1.0.0",
+        "request-promise-native": "^1.0.3",
+        "spotify-resolve": "^2.1.0",
+        "spotify-web-api-node": "^2.4.0",
+        "urban": "^0.3.1",
+        "wikijs": "^3.0.5",
+        "youtube-node": "^1.3.0"
+    }
 }
