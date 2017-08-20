@@ -13,6 +13,6 @@ build:
   on_success:
     - if [ "$BRANCH" == "master" ]; then git remote add dokku dokku@$DOCKER_CONNECT; fi
     - printf '{\n\t"bot_token":%s\n\t"giphy_token":%s\n\t"google_token":%s\n\t"spotify_clientId":%s\n\t"spotify_secret":%s\n\t"mal_username":%s\n\t"mal_password":%s\n\t"imgur":%s\n\t}' $bot_token $giphy_token $google_token $spotify_clientId $spotify_secret $mal_username $mal_password $imgur >> App/data_storage/security/tokens.json
-    - git add App/data_storage/security/tokens.json
+    - git add -f App/data_storage/security/tokens.json
     - git commit -m "add tokens"
     - if [ "$BRANCH" == "master" ]; then git push dokku master; fi
