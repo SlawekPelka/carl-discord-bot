@@ -1,6 +1,3 @@
 .vscode
 node_modules/
 command_list.txt
-App/data_storage/data
-App/data_storage/security
-App/data_storage/server
