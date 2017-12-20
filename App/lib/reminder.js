@@ -4,10 +4,9 @@ module.exports = {
     exec(params, message, options, client) {
         var time = parseInt(options[0]) ? parseInt(options[0]) : 1000;
         setTimeout(() => {
-            message.author.send(params).then(m => {
-                message.channel.send(`Will remind you of **${params}** in *${humanizeDuration(time)}*`);
-            });
+            message.author.send(params).then(m => {});
         }, time);
+        message.channel.send(`Will remind you of **${params}** in *${humanizeDuration(time)}*`);
     },
     metaData() {
         return {
